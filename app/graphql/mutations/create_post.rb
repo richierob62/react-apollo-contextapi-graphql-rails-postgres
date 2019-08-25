@@ -9,6 +9,7 @@ module Mutations
     def resolve(body: nil)
       Post.create!(
         body: body,
+        user: context[:current_user],
       )
     end
   end
