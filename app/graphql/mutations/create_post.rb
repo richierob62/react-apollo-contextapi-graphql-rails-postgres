@@ -11,6 +11,8 @@ module Mutations
         body: body,
         user: context[:current_user],
       )
+    rescue ActiveRecord::RecordInvalid => e
+      GraphQL::ExecutionError.new(e.record.errors.messages)
     end
   end
 end
