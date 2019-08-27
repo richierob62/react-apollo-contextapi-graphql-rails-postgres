@@ -75,4 +75,6 @@ gem 'search_object'
 gem 'search_object_graphql'
 
 gem 'foreman'
+gem 'rack-cors'
+
 

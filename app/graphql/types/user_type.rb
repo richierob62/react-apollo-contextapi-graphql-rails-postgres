@@ -5,5 +5,10 @@ module Types
     field :email, String, null: false
     field :likes, [LikeType], null: false
     field :posts, [PostType], null: false
+    field :has_posts, Boolean, null: true
+
+    def has_posts
+      object.posts.size
+    end
   end
 end

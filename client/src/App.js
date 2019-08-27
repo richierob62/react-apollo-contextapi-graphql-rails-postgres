@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloClient } from 'apollo-client'
+import { ApolloProvider } from 'react-apollo'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import React from 'react'
+import SignIn from './components/SignIn'
+import { createHttpLink } from 'apollo-link-http'
+
+const client = new ApolloClient({
+  link: createHttpLink({
+    uri: 'http://localhost:3001/graphql'
+  }),
+  cache: new InMemoryCache()
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ApolloProvider client={client}>
+      <SignIn />
+      <h1>TO DO</h1>
+      <h2>display posts</h2>
+      <h2>create post if signed in</h2>
+      <h2>like if signed in</h2>
+    </ApolloProvider>
+  )
 }
 
-export default App;
+export default App
