@@ -73,3 +73,6 @@ gem 'graphiql-rails', group: :development
 
 gem 'search_object'
 gem 'search_object_graphql'
+
+gem 'foreman'
+
