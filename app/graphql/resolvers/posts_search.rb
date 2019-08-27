@@ -18,6 +18,8 @@ class Resolvers::PostsSearch
 
   # when "filter" is passed "apply_filter" would be called to narrow the scope
   option :filter, type: PostFilter, with: :apply_filter
+  option :count, type: Int, with: :apply_count
+  option :skip, type: Int, with: :apply_skip
 
   # apply_filter recursively loops through "OR" branches
   def apply_filter(scope, value)
@@ -34,5 +36,13 @@ class Resolvers::PostsSearch
     value[:OR].reduce(branches) { |s, v| normalize_filters(v, s) } if value[:OR].present?
 
     branches
+  end
+
+  def apply_count(scope, value)
+    scope.limit(value)
+  end
+
+  def apply_skip(scope, value)
+    scope.offset(value)
   end
 end
