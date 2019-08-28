@@ -1,22 +1,13 @@
 import React from 'react'
-import gql from 'graphql-tag'
+import SIGNIN_USER from '../mutations/signin'
 import { useMutation } from '@apollo/react-hooks'
-
-const SIGNIN_USER = gql`
-  mutation($email: String!, $password: String!) {
-    signinUser(signinInput: { email: $email, password: $password }) {
-      token
-      user {
-        id
-        name
-        email
-      }
-    }
-  }
-`
 
 export default () => {
   const [signinUser, { loading, error, data }] = useMutation(SIGNIN_USER)
+
+  if (data) {
+    localStorage.setItem('token', data.signinUser.token)
+  }
 
   return (
     <>
