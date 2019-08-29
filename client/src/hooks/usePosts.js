@@ -1,9 +1,8 @@
 import { useContext, useEffect } from 'react'
-import { useMutation, useQuery } from '@apollo/react-hooks'
 
 import ALL_POSTS from '../queries/all_posts'
-import CREATE_POST from '../mutations/create_post'
 import { PostsContext } from '../state/posts'
+import { useQuery } from '@apollo/react-hooks'
 
 export const usePosts = (filters = {}) => {
   // validate filters
@@ -16,46 +15,19 @@ export const usePosts = (filters = {}) => {
   const { posts, setPosts } = useContext(PostsContext)
 
   // query for all posts matching filter
-  const {
-    loading: loadingPosts,
-    error: loadingPostsError,
-    data: { allPosts }
-  } = useQuery(ALL_POSTS, {
+  const { loading, error, data } = useQuery(ALL_POSTS, {
     variables: validFilters
   })
 
   useEffect(() => {
-    if (allPosts) {
-      setPosts(allPosts)
+    if ('allPosts' in data) {
+      setPosts(data.allPosts)
     }
-  }, [allPosts, loadingPosts, loadingPostsError])
-
-  // mutation to add a post
-  const [
-    createPost,
-    { loading: addingPost, error: addingPostError, data: addedPost }
-  ] = useMutation(CREATE_POST)
-
-  const savePost = body => {
-    createPost({
-      variables: {
-        body
-      }
-      // refetchQueries: [
-      //   {
-      //     query: ALL_POSTS,
-      //     variables: filters
-      //   }
-      // ]
-    })
-  }
+  }, [loading, error, data])
 
   return {
-    loadingPosts,
-    loadingPostsError,
-    posts,
-    addingPost,
-    addingPostError,
-    savePost
+    loading,
+    error,
+    posts
   }
 }

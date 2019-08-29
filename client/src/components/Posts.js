@@ -3,10 +3,10 @@ import React from 'react'
 import { usePosts } from '../hooks/usePosts'
 
 export default () => {
-  const { loadingPosts, loadingPostsError, posts } = usePosts()
+  const { loading, error, posts } = usePosts()
 
-  if (loadingPosts) return <h1>Posts are Loading</h1>
-  if (loadingPostsError) return <h1>Error loading posts</h1>
+  if (loading) return <h1>Posts are Loading</h1>
+  if (error) return <h1>Error loading posts</h1>
 
   return (
     <div>

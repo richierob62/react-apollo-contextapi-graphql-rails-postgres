@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
-import { usePosts } from '../hooks/usePosts'
+import { useAddPost } from '../hooks/useAddPost'
 
 export default () => {
-  const { savePost } = usePosts()
+  const { savePost } = useAddPost()
 
   const [val, setVal] = useState('')
 
