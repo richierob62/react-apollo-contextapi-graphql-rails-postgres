@@ -40,13 +40,13 @@ export const usePosts = (filters = {}) => {
     createPost({
       variables: {
         body
-      },
-      refetchQueries: [
-        {
-          query: ALL_POSTS,
-          variables: filters
-        }
-      ]
+      }
+      // refetchQueries: [
+      //   {
+      //     query: ALL_POSTS,
+      //     variables: filters
+      //   }
+      // ]
     })
   }
 
