@@ -4,6 +4,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import Posts from './components/Posts'
 import React from 'react'
 import SignIn from './components/SignIn'
+import Store from './state/store'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 
@@ -30,8 +31,10 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <SignIn />
-      <Posts />
+      <Store>
+        <SignIn />
+        <Posts />
+      </Store>
     </ApolloProvider>
   )
 }

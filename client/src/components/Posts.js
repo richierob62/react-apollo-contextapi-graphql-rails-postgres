@@ -3,15 +3,15 @@ import React from 'react'
 import { usePosts } from '../hooks/usePosts'
 
 export default () => {
-  const { allPosts_Loading, allPosts_Error, allPosts } = usePosts()
+  const { loadingPosts, loadingPostsError, posts } = usePosts()
 
-  if (allPosts_Loading) return <h1>Posts are Loading</h1>
-  if (allPosts_Error) return <h1>Error loading posts</h1>
+  if (loadingPosts) return <h1>Posts are Loading</h1>
+  if (loadingPostsError) return <h1>Error loading posts</h1>
 
   return (
     <div>
       <ul>
-        {allPosts.map(p => (
+        {posts.map(p => (
           <li key={p.id}>{`${p.body} by ${
             p.postedBy ? p.postedBy.name : 'unknown'
           }`}</li>

@@ -5,13 +5,13 @@ import { usePosts } from '../hooks/usePosts'
 export default () => {
   const [val, setVal] = useState('')
 
-  const { addAPost } = usePosts()
+  const { savePost } = usePosts()
 
   return (
     <div>
       <form
         onSubmit={() => {
-          addAPost(val)
+          savePost(val)
           setVal('')
         }}
       >
